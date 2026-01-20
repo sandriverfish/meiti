@@ -1,0 +1,9 @@
+yt-dlp
+openai
+moviepy<2.0
+openai-whisper
+torch
+requests
+pydub
+tqdm
+emoji
