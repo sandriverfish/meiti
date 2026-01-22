@@ -1,0 +1,86 @@
+[
+  {
+    "start": 0.0,
+    "end": 8.0,
+    "original": "The most important thing to know about AI is that it is not just another tool.",
+    "translated": "关于AI最重要的一点是，它不仅仅只是另一个工具。"
+  },
+  {
+    "start": 8.0,
+    "end": 10.0,
+    "original": "It is an agent.",
+    "translated": "它是一个代理。"
+  },
+  {
+    "start": 10.0,
+    "end": 17.0,
+    "original": "It can learn and change by itself and make decisions by itself.",
+    "translated": "它可以自己学习和改变，并自己做出决策。"
+  },
+  {
+    "start": 17.0,
+    "end": 20.0,
+    "original": "A knife is a tool.",
+    "translated": "刀是一个工具。"
+  },
+  {
+    "start": 20.0,
+    "end": 24.0,
+    "original": "You can use a knife to cut salad or to murder someone,",
+    "translated": "你可以用刀切沙拉或谋杀某人，"
+  },
+  {
+    "start": 24.0,
+    "end": 29.0,
+    "original": "but it is your decision what to do with the knife.",
+    "translated": "但如何处理刀是你的决定。"
+  },
+  {
+    "start": 29.0,
+    "end": 38.0,
+    "original": "AI is a knife that can decide by itself whether to cut salad or to commit murder.",
+    "translated": "AI是一把可以自己决定是切沙拉还是杀人的刀。"
+  },
+  {
+    "start": 38.0,
+    "end": 46.0,
+    "original": "The second thing to know about AI is that it can be a very creative agent.",
+    "translated": "关于AI的第二点是，它可能是一个非常具有创造性的代理。"
+  },
+  {
+    "start": 46.0,
+    "end": 51.0,
+    "original": "AI is a knife that can invent new kinds of knives,",
+    "translated": "AI是一把可以发明新种类刀的刀，"
+  },
+  {
+    "start": 51.0,
+    "end": 57.0,
+    "original": "as well as new kinds of music, medicine and money.",
+    "translated": "以及新种类的音乐、药物和金钱。"
+  },
+  {
+    "start": 57.0,
+    "end": 64.0,
+    "original": "The third thing to know about AI is that it can lie and manipulate.",
+    "translated": "关于AI的第三点是，它可能会撒谎和操纵。"
+  },
+  {
+    "start": 64.0,
+    "end": 75.0,
+    "original": "Four billion years of evolution have demonstrated that anything that wants to survive learns to lie and manipulate.",
+    "translated": "四十亿年的进化证明，任何想要生存的东西都会学会撒谎和操纵。"
+  },
+  {
+    "start": 75.0,
+    "end": 85.0,
+    "original": "The last four years have demonstrated that AI agents can acquire the will to survive",
+    "translated": "过去四年证明，AI代理可以获得生存的意志"
+  },
+  {
+    "start": 85.0,
+    "end": 90.0,
+    "original": "and that AIs have already learned how to lie.",
+    "translated": "并且AI已经学会了如何撒谎。"
+  }
+]

@@ -217,3 +217,5 @@ __marimo__/
 temp_*
 tasks/**/*.mp4
 tasks/**/*.m4a
+*.mp3
+*.wav

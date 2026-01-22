@@ -1,0 +1,86 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.66,
+    "original": "Today, I'm excited to announce the AMD Ryzen AI Halo,",
+    "translated": "今天，我兴奋地宣布 AMD Ryzen AI Halo，"
+  },
+  {
+    "start": 4.66,
+    "end": 8.08,
+    "original": "a new reference platform for local AI deployment.",
+    "translated": "一个用于本地 AI 部署的新参考平台。"
+  },
+  {
+    "start": 8.08,
+    "end": 16.88,
+    "original": "Now, I would say this is pretty beautiful.",
+    "translated": "现在，我想说它相当漂亮。"
+  },
+  {
+    "start": 16.88,
+    "end": 19.0,
+    "original": "Do you guys agree?",
+    "translated": "你们同意吗？"
+  },
+  {
+    "start": 21.56,
+    "end": 23.76,
+    "original": "So let me tell you what it is.",
+    "translated": "那么让我告诉你们它是什么。"
+  },
+  {
+    "start": 23.76,
+    "end": 27.400000000000002,
+    "original": "This is the smallest AI development system in the world,",
+    "translated": "这是世界上最小的 AI 开发系统，"
+  },
+  {
+    "start": 27.68,
+    "end": 32.4,
+    "original": "capable of running models with up to 200 billion parameters locally,",
+    "translated": "能够在本地运行高达 2000 亿参数的模型，"
+  },
+  {
+    "start": 32.4,
+    "end": 33.8,
+    "original": "not connected to anything.",
+    "translated": "不连接任何东西。"
+  },
+  {
+    "start": 34.879999999999995,
+    "end": 38.12,
+    "original": "It's powered by our highest end Ryzen AI Max processor",
+    "translated": "它搭载了我们最高端的 Ryzen AI Max 处理器"
+  },
+  {
+    "start": 38.12,
+    "end": 41.72,
+    "original": "with 128 gigabytes of high speed unified memory",
+    "translated": "配备 128 GB 的高速统一内存"
+  },
+  {
+    "start": 41.72,
+    "end": 44.72,
+    "original": "that is shared by CPU, GPU, and NPU.",
+    "translated": "该内存由 CPU、GPU 和 NPU 共享。"
+  },
+  {
+    "start": 45.599999999999994,
+    "end": 48.4,
+    "original": "This architecture accelerates system performance",
+    "translated": "该架构加速系统性能"
+  },
+  {
+    "start": 48.4,
+    "end": 51.68,
+    "original": "and makes it possible to efficiently run large AI models",
+    "translated": "并使高效运行大型 AI 模型成为可能"
+  },
+  {
+    "start": 51.68,
+    "end": 54.68,
+    "original": "on a compact desktop PC that fits in your hand.",
+    "translated": "在一台可握在手中的紧凑型桌面 PC 上。"
+  }
+]

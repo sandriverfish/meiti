@@ -1,0 +1,98 @@
+[
+  {
+    "start": 0.0,
+    "end": 7.92,
+    "original": "DGX Spark. The first, the AI supercomputer, we built an AI supercomputer in 2016. It's",
+    "translated": "DGX Spark. 第一个，AI超级计算机，我们在2016年建造了一台AI超级计算机。它是"
+  },
+  {
+    "start": 7.92,
+    "end": 12.72,
+    "original": "called the DGX One. It was the first version of everything that I've been talking about.",
+    "translated": "叫做DGX One。它是我一直在谈论的所有内容的第一版。"
+  },
+  {
+    "start": 12.72,
+    "end": 22.080000000000002,
+    "original": "Eight Volta GPUs connected with MV Link. It took us billions of dollars to build and",
+    "translated": "八个Volta GPU通过NVLink连接。我们花费了数十亿美元来建造它，并且"
+  },
+  {
+    "start": 22.080000000000002,
+    "end": 29.28,
+    "original": "on the day we announced it, DGX One, there were no customers, no interest, no applause.",
+    "translated": "在我们宣布它的那一天，DGX One，没有任何客户，没有兴趣，没有掌声。"
+  },
+  {
+    "start": 29.28,
+    "end": 36.160000000000004,
+    "original": "100% confusion. Why would somebody build a computer like that? Does it run Windows? Nope.",
+    "translated": "100%困惑。为什么有人会建造那样的电脑？它能运行Windows吗？不。"
+  },
+  {
+    "start": 40.56,
+    "end": 48.0,
+    "original": "And so we built it anyway. Well, thankfully, a young company, a startup, a non-profit startup,",
+    "translated": "尽管如此，我们还是建造了它。幸运的是，一家年轻的公司，一家初创公司，一家非营利性初创公司，"
+  },
+  {
+    "start": 48.0,
+    "end": 52.08,
+    "original": "in San Francisco, was so delighted to see the computer. They said, can we have one? And I thought,",
+    "translated": "在旧金山，看到这台电脑非常高兴。他们说，我们可以要一台吗？我想，"
+  },
+  {
+    "start": 52.08,
+    "end": 55.839999999999996,
+    "original": "oh my gosh, we sold one. But then I discovered it was a non-profit.",
+    "translated": "天哪，我们卖了一台。但随后我发现它是一家非营利组织。"
+  },
+  {
+    "start": 58.96,
+    "end": 64.64,
+    "original": "But I put a computer, put a DGX One in my car, and I drove it up to San Francisco,",
+    "translated": "但我把一台电脑，把DGX One放进我的车里，开车把它送到旧金山，"
+  },
+  {
+    "start": 64.64,
+    "end": 68.72,
+    "original": "and the name of that company is OpenAI. This is the first one we've ever shipped.",
+    "translated": "那家公司的名字是OpenAI。这是我们出货的第一台。"
+  },
+  {
+    "start": 69.92,
+    "end": 77.2,
+    "original": "In 2016, Jensen delivered Nvidia's AI supercomputer, the first of its kind, to Elon Musk,",
+    "translated": "2016年，Jensen将Nvidia的AI超级计算机，第一台此类机器，送给了Elon Musk，"
+  },
+  {
+    "start": 77.2,
+    "end": 83.44,
+    "original": "then a board member of OpenAI, which used it to create the building blocks of chat GPT.",
+    "translated": "当时他是OpenAI的董事会成员，用它来创建ChatGPT的构建模块。"
+  },
+  {
+    "start": 84.08,
+    "end": 89.52000000000001,
+    "original": "How are you? When AI took off? Hey guys. So did Jensen Huang's reputation.",
+    "translated": "你好？AI起飞时怎么样？嘿，伙计们。Jensen Huang的名声也是如此。"
+  },
+  {
+    "start": 99.68,
+    "end": 103.76,
+    "original": "I don't know what the life lesson is there. There are a lot of non-profits.",
+    "translated": "我不知道那里的生活教训是什么。有很多非营利组织。"
+  },
+  {
+    "start": 104.72,
+    "end": 111.76,
+    "original": "So next time, maybe the lesson is this. If a developer reaches out to you and needs a GPU,",
+    "translated": "所以下次，也许教训是这样的。如果有开发者联系你并需要GPU，"
+  },
+  {
+    "start": 111.76,
+    "end": 118.48,
+    "original": "the answer is yes. And so that's right.",
+    "translated": "答案是是的。就是这样。"
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "start": 0.0,
+    "end": 17.2,
+    "original": "NVIDIA ISAAC GROOT is a platform of SIM-ready data, simulation frameworks, and synthetic",
+    "translated": "NVIDIA ISAAC GROOT 是一个提供 SIM 准备数据、仿真框架和合成的"
+  },
+  {
+    "start": 17.2,
+    "end": 21.12,
+    "original": "data generation blueprints, and pre-trained models.",
+    "translated": "数据生成蓝图和预训练模型"
+  },
+  {
+    "start": 21.12,
+    "end": 27.96,
+    "original": "NVIDIA ISAAC GROOT N1 is an open, generalist foundation model for humanoid robots.",
+    "translated": "NVIDIA ISAAC GROOT N1 是一个开放的、通用的人形机器人基础模型"
+  },
+  {
+    "start": 28.52,
+    "end": 35.480000000000004,
+    "original": "GROOT N1 features a dual system architecture for thinking fast and slow, inspired by principles",
+    "translated": "GROOT N1 具有双系统架构，用于快速和慢速思考，受原则启发"
+  },
+  {
+    "start": 35.480000000000004,
+    "end": 38.04,
+    "original": "of human cognitive processing.",
+    "translated": "人类认知处理的原则"
+  },
+  {
+    "start": 38.04,
+    "end": 44.2,
+    "original": "The slow thinking system lets the robot perceive and reason about its environment and instructions,",
+    "translated": "慢思考系统让机器人感知并推理其环境和指令"
+  },
+  {
+    "start": 44.2,
+    "end": 47.84,
+    "original": "and plan the right actions to take.",
+    "translated": "并规划要采取的正确行动"
+  },
+  {
+    "start": 47.84,
+    "end": 56.480000000000004,
+    "original": "The fast thinking system translates the plan into precise and continuous robot actions.",
+    "translated": "快思考系统将计划转化为精确且连续的机器人动作"
+  },
+  {
+    "start": 56.48,
+    "end": 61.08,
+    "original": "While Internet-scale training data provides common sense and reasoning, it doesn't teach",
+    "translated": "虽然互联网规模的训练数据提供常识和推理，但它不教"
+  },
+  {
+    "start": 61.08,
+    "end": 67.52,
+    "original": "robots specific actions or control, so we need better data and more of it.",
+    "translated": "机器人特定的动作或控制，所以我们需要更好的数据和更多的数据"
+  },
+  {
+    "start": 67.52,
+    "end": 71.52,
+    "original": "Human demonstration data is limited by the number of hours in a day.",
+    "translated": "人类演示数据受一天中的小时数限制"
+  },
+  {
+    "start": 71.52,
+    "end": 77.75999999999999,
+    "original": "With GROOT blueprints for synthetic data generation built on NVIDIA Omniverse and Cosmos, we can",
+    "translated": "借助基于 NVIDIA Omniverse 和 Cosmos 构建的 GROOT 合成数据生成蓝图，我们可以"
+  },
+  {
+    "start": 77.75999999999999,
+    "end": 83.96,
+    "original": "exponentially multiply a small number of real-world data captures into a massive, diverse training",
+    "translated": "将少量的真实世界数据捕获指数级扩展为庞大、多样化的训练"
+  },
+  {
+    "start": 83.96,
+    "end": 86.44,
+    "original": "data set.",
+    "translated": "数据集"
+  },
+  {
+    "start": 86.44,
+    "end": 93.67999999999999,
+    "original": "GROOT N1's generalization lets robots manipulate common objects with ease and execute multi-step",
+    "translated": "GROOT N1 的泛化能力使机器人能够轻松操控常见物体并执行多步骤"
+  },
+  {
+    "start": 93.67999999999999,
+    "end": 106.88,
+    "original": "sequences collaboratively.",
+    "translated": "协作执行序列"
+  },
+  {
+    "start": 106.88,
+    "end": 115.03999999999999,
+    "original": "Across many environments, and even multiple embodiments.",
+    "translated": "跨越许多环境，甚至多种形态"
+  },
+  {
+    "start": 115.04,
+    "end": 122.16000000000001,
+    "original": "And with synthetic data generation and reinforcement learning, humanoid robot developers can post-train",
+    "translated": "借助合成数据生成和强化学习，人形机器人开发者可以对 GROOT N1 进行后训练"
+  },
+  {
+    "start": 122.16000000000001,
+    "end": 129.52,
+    "original": "GROOT N1 for their specific robot and task.",
+    "translated": "GROOT N1 以适配其特定机器人和任务"
+  },
+  {
+    "start": 129.52,
+    "end": 134.72,
+    "original": "The age of generalist robots is here, driven by developers building on NVIDIA Isaac GROOT.",
+    "translated": "通用机器人的时代已经到来，由基于 NVIDIA Isaac GROOT 的开发者推动"
+  }
+]
