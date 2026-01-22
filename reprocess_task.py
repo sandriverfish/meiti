@@ -1,104 +1,127 @@
 import os
 import json
-import sys
-from moviepy.editor import VideoFileClip, TextClip, CompositeVideoClip, ImageClip
-from PIL import Image, ImageDraw, ImageFont
-import numpy as np
-from x_post_conv import XPostSkill
+import subprocess
+import datetime
+import shutil
 
-def reprocess(task_dir, video_filename):
-    print(f"[*] Reprocessing task: {task_dir}")
+def format_time_ass(seconds):
+    """Format seconds to ASS time format: h:mm:ss.cc"""
+    hours = int(seconds // 3600)
+    minutes = int((seconds % 3600) // 60)
+    secs = seconds % 60
+    centis = int((secs - int(secs)) * 100)
+    return f"{hours}:{minutes:02}:{int(secs):02}.{centis:02}"
+
+def generate_ass(segments, output_path):
+    print(f"[*] Generating ASS: {output_path}")
     
+    header = """[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 1
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Microsoft YaHei,60,&H00FFFFFF,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
+Style: SpeakerA,Microsoft YaHei,60,&H0000FFFF,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
+Style: SpeakerB,Microsoft YaHei,60,&H00FFFF00,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
+Style: SpeakerC,Microsoft YaHei,60,&H0000FF00,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+"""
+    # Colors (A=Yellow, B=Cyan, C=Green)
+    # ASS Order: &H(Alpha)(Blue)(Green)(Red)
+    # Yellow: R=FF, G=FF, B=00 -> 00FFFF
+    # Cyan:   R=00, G=FF, B=FF -> FFFF00
+    
+    try:
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(header)
+            for seg in segments:
+                start = format_time_ass(seg["start"])
+                end = format_time_ass(seg["end"])
+                text = seg["translated"]
+                speaker = seg.get("speaker", "A")
+                
+                style = "SpeakerA"
+                if speaker == "B":
+                    style = "SpeakerB"
+                elif speaker == "C":
+                    style = "SpeakerC"
+                elif speaker == "A":
+                    style = "SpeakerA"
+                else:
+                    style = "Default"
+                
+                # Sanitize text for ASS (remove newlines if any, or convert to \N)
+                text = text.replace("\n", " ").strip()
+                
+                line = f"Dialogue: 0,{start},{end},{style},,0,0,0,,{text}\n"
+                f.write(line)
+        return output_path
+    except Exception as e:
+        print(f"[-] ASS generation error: {e}")
+        return None
+
+def main():
+    task_dir = r"e:\MyCode\meiti\tasks\20260121_054038_Hassabis_on_an_AI_Shift_Bigger_etc"
     json_path = os.path.join(task_dir, "translation_check.json")
+    ass_path = os.path.join(task_dir, "captions_colored.ass")
+    
+    # Input Video (Raw)
+    input_video = os.path.join(task_dir, "raw_Hassabis on an AI Shift Bigger Than Industrial Age.mp4")
+    # Output Video
+    output_video = os.path.join(task_dir, "processed_v3_ffmpeg_Hassabis.mp4")
+    
     if not os.path.exists(json_path):
         print(f"[-] JSON not found: {json_path}")
         return
 
+    print(f"[*] Reading translation data: {json_path}")
     with open(json_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    # key from hardcode or file (using the known key)
-    key = "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"
-    skill = XPostSkill(url="", nvidia_key=key) # minimal init
-    
-    # Extract originals
-    originals = [item["original"] for item in data]
-    print(f"[*] Found {len(originals)} segments to re-translate.")
-    
-    # Re-translate
-    new_translations = skill._translate_batch(originals)
-    
-    # Update data
-    for i, item in enumerate(data):
-        if i < len(new_translations):
-            trans_item = new_translations[i]
-            if isinstance(trans_item, dict):
-                 item["translated"] = trans_item.get("translated", item["original"])
-                 item["speaker"] = trans_item.get("speaker", "A") # Update speaker too if changed
-            else:
-                 item["translated"] = str(trans_item)
-    
-    # Save updated JSON
-    with open(json_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-    print("[*] Updated translation_check.json")
-
-    # Re-generate SRT
-    srt_path = os.path.join(task_dir, "captions_reprocessed.srt")
-    skill._generate_srt(data, srt_path)
-    print(f"[*] Generated SRT: {srt_path}")
-
-    # Re-render Video
-    video_path = os.path.join(task_dir, f"raw_{video_filename}")
-    if not os.path.exists(video_path):
-        # check if processed exists and use that as base? No, need raw.
-        # check if input argument file exists
-        search_path = os.path.join(task_dir, video_filename) # maybe it wasn't renamed to raw_ yet?
-        if os.path.exists(search_path):
-             video_path = search_path
-        else:
-             print(f"[-] Raw video not found at {video_path}")
-             return
-
-    print(f"[*] Rendering video using: {video_path}")
-    clip = VideoFileClip(video_path)
-    subtitles = []
-    
-    for seg in data:
-        text = seg["translated"]
-        speaker = seg.get("speaker", "A")
+        segments = json.load(f)
         
-        # Determine Color
-        color = "yellow"
-        if speaker == "B":
-            color = "#00FFFF" # Cyan
-        elif speaker == "C":
-            color = "#00FF00" # Green
+    print(f"[*] Found {len(segments)} segments.")
+    
+    # 1. Generate ASS
+    generate_ass(segments, ass_path)
+    
+    # 2. Render with ffmpeg
+    if not os.path.exists(input_video):
+        print(f"[-] Input video not found: {input_video}")
+        return
 
-        # Use skill's method if possible, but need to bind it? 
-        # skill._create_subtitle_clip uses self.font_path
-        sub = skill._create_subtitle_clip(
-            text, seg["start"], seg["end"] - seg["start"], clip.size, color=color
-        )
-        subtitles.append(sub)
-
-    final_clip = CompositeVideoClip([clip] + subtitles)
-    final_clip.duration = clip.duration
+    print(f"[*] Rendering video using FFMPEG...")
+    print(f"Input: {input_video}")
+    print(f"Subs:  {ass_path}")
+    print(f"Output: {output_video}")
     
-    output_path = os.path.join(task_dir, f"processed_v2_{video_filename}")
+    cwd = task_dir
+    rel_input = os.path.basename(input_video)
+    rel_ass = os.path.basename(ass_path)
+    rel_output = os.path.basename(output_video)
     
-    if clip.audio:
-        final_clip.write_videofile(
-            output_path, codec="libx264", audio_codec="aac", fps=clip.fps or 24
-        )
-    else:
-        final_clip.write_videofile(
-             output_path, codec="libx264", audio=False, fps=clip.fps or 24
-        )
+    cmd = [
+        "ffmpeg",
+        "-y",
+        "-i", rel_input,
+        "-vf", f"subtitles='{rel_ass}'",
+        "-c:v", "libx264",
+        "-preset", "medium",
+        "-crf", "23",
+        "-c:a", "copy",
+        rel_output
+    ]
     
-    print(f"[*] Done! New video: {output_path}")
+    print(f"Command: {' '.join(cmd)}")
+    
+    try:
+        subprocess.run(cmd, cwd=cwd, check=True)
+        print(f"[*] Done! New video: {output_video}")
+    except subprocess.CalledProcessError as e:
+        print(f"[-] FFMPEG error: {e}")
 
 if __name__ == "__main__":
-    task_dir = r"tasks/20260121_054038_Hassabis_on_an_AI_Shift_Bigger_etc"
-    video_filename = "Hassabis on an AI Shift Bigger Than Industrial Age.mp4"
-    reprocess(task_dir, video_filename)
+    main()

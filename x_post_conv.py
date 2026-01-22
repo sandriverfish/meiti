@@ -1,5 +1,6 @@
 import os
 import sys
+import subprocess
 
 # CRITICAL: Set PATH before importing yt_dlp so it can detect Node.js runtime
 # yt-dlp detects JS runtimes at import time, not when YoutubeDL() runs
@@ -445,45 +446,6 @@ class XPostSkill:
         text = re.sub(r"\s+", " ", text).strip()
         return text
 
-    def _create_subtitle_clip(self, text, start_time, duration, video_size, color="yellow"):
-        # Create PIL image
-        w, h = video_size
-        img = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-        draw = ImageDraw.Draw(img)
-
-        # Load font - Best practice: 24-32px.
-        fontsize = int(h / 25)
-        try:
-            font = ImageFont.truetype(self.font_path, fontsize)
-        except:
-            font = ImageFont.load_default()
-
-        # No wrapping as requested
-        wrapped_lines = text
-
-        # Calculate Text Size
-        bbox = draw.textbbox((0, 0), wrapped_lines, font=font, align="center")
-        text_w = bbox[2] - bbox[0]
-        text_h = bbox[3] - bbox[1]
-
-        # Position: Bottom 5-8% margin
-        x = (w - text_w) / 2
-        y = h * 0.92 - text_h  # bottom margin ~8%
-
-        # Draw with stroke (Outline) for visibility
-        draw.text(
-            (x, y),
-            wrapped_lines,
-            font=font,
-            fill=color,
-            align="center",
-            stroke_width=3,
-            stroke_fill="black",
-        )
-
-        # Convert to MoviePy ImageClip
-        txt_clip = ImageClip(np.array(img)).set_start(start_time).set_duration(duration)
-        return txt_clip
 
     def _generate_srt(self, segments, output_path):
         print(f"[*] Generating SRT: {output_path}")
@@ -508,6 +470,106 @@ class XPostSkill:
         except Exception as e:
             print(f"[-] SRT generation error: {e}")
             return None
+
+    def _format_time_ass(self, seconds):
+        hours = int(seconds // 3600)
+        minutes = int((seconds % 3600) // 60)
+        secs = seconds % 60
+        centis = int((secs - int(secs)) * 100)
+        return f"{hours}:{minutes:02}:{int(secs):02}.{centis:02}"
+
+    def _generate_ass(self, segments, output_path):
+        print(f"[*] Generating ASS: {output_path}")
+        
+        header = """[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 1
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Microsoft YaHei,60,&H00FFFFFF,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
+Style: SpeakerA,Microsoft YaHei,60,&H0000FFFF,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
+Style: SpeakerB,Microsoft YaHei,60,&H00FFFF00,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
+Style: SpeakerC,Microsoft YaHei,60,&H0000FF00,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+"""
+        try:
+            with open(output_path, "w", encoding="utf-8") as f:
+                f.write(header)
+                for seg in segments:
+                    start = self._format_time_ass(seg["start"])
+                    end = self._format_time_ass(seg["end"])
+                    text = seg["translated"]
+                    speaker = seg.get("speaker", "A")
+                    
+                    style = "SpeakerA"
+                    if speaker == "B":
+                        style = "SpeakerB"
+                    elif speaker == "C":
+                        style = "SpeakerC"
+                    elif speaker == "A":
+                        style = "SpeakerA"
+                    else:
+                        style = "Default"
+                    
+                    text = text.replace("\n", " ").strip()
+                    line = f"Dialogue: 0,{start},{end},{style},,0,0,0,,{text}\n"
+                    f.write(line)
+            return output_path
+        except Exception as e:
+            print(f"[-] ASS generation error: {e}")
+            return None
+
+    def _burn_subtitles_ffmpeg(self, video_path, sub_path, output_path):
+        print(f"[*] Burning subtitles with FFMPEG...")
+        print(f"Input: {video_path}")
+        print(f"Subtitles: {sub_path}")
+        
+        # We use relative paths to avoid Windows path escaping hell in filters
+        cwd = os.path.dirname(os.path.abspath(output_path)) # Execute in task dir
+        
+        # Ensure files are available relative to cwd
+        # Ideally video_path and sub_path are in cwd or absolute.
+        # If they are absolute and on different drives, relpath fails.
+        # So we'll try to rely on them being in the same task_dir usually.
+        
+        try:
+             rel_input = os.path.basename(video_path)
+             rel_sub = os.path.basename(sub_path)
+             rel_output = os.path.basename(output_path)
+             
+             # Verify files exist
+             if not os.path.exists(video_path):
+                 print(f"[-] Input video missing: {video_path}")
+                 return False
+             if not os.path.exists(sub_path):
+                 print(f"[-] Subtitle file missing: {sub_path}")
+                 return False
+
+             cmd = [
+                "ffmpeg",
+                "-y",
+                "-i", rel_input,
+                "-vf", f"subtitles='{rel_sub}'",
+                "-c:v", "libx264",
+                "-preset", "medium",
+                "-crf", "23",
+                "-c:a", "copy",
+                rel_output
+             ]
+             
+             print(f"Command: {' '.join(cmd)}")
+             subprocess.run(cmd, cwd=cwd, check=True)
+             print(f"[*] FFMPEG success: {output_path}")
+             return True
+             
+        except Exception as e:
+             print(f"[-] FFMPEG error: {e}")
+             return False
 
     def _process_video(self, video_path, summary_text):
         print(f"[*] Processing video: {video_path}")
@@ -543,17 +605,13 @@ class XPostSkill:
 
         # Check for Manual Translation Override
         manual_json_path = os.path.join(self.task_dir, "translation_check.json")
-        manual_segments = None
-        # ... (rest of manual check logic could be here, but usually it won't exist yet for new folder)
 
         try:
-            clip = VideoFileClip(video_path)
-            subtitles = []
-            final_segments_for_srt = []
-
             # NORMAL FLOW
             # Transcribe with timestamps
             transcript_result = self._transcribe(audio_path)
+            
+            final_segments_for_render = []
 
             if (
                 transcript_result
@@ -605,26 +663,9 @@ class XPostSkill:
                         }
                     )
                     
-                    # Record for SRT
-                    final_segments_for_srt.append({
-                        "start": seg["start"],
-                        "end": seg["end"],
-                        "translated": display_txt
-                    })
-
                     text_idx += 1
-                    
-                    # Determine Color
-                    color = "yellow"
-                    if speaker == "B":
-                        color = "#00FFFF" # Cyan
-                    elif speaker == "C":
-                        color = "#00FF00" # Green
-                    
-                    sub = self._create_subtitle_clip(
-                        display_txt, seg["start"], seg["end"] - seg["start"], clip.size, color=color
-                    )
-                    subtitles.append(sub)
+                
+                final_segments_for_render = debug_data
 
                 # Write debug file
                 with open(
@@ -633,13 +674,11 @@ class XPostSkill:
                     encoding="utf-8",
                 ) as f:
                     json.dump(debug_data, f, indent=2, ensure_ascii=False)
-                
-                final_segments_for_srt = debug_data
 
             else:
-                # Fallback: Overlay translated summary
+                # Fallback: Overlay translated summary (single segment)
                 print(
-                    "[*] No transcript found (silent video?). Overlaying summary text..."
+                    "[*] No transcript found (silent video?). Creating summary subtitle..."
                 )
                 clean_summary = self._clean_text(summary_text)
                 display_text = (
@@ -647,35 +686,39 @@ class XPostSkill:
                     if len(clean_summary) > 50
                     else clean_summary
                 )
-                sub = self._create_subtitle_clip(
-                    display_text, 0, clip.duration, clip.size
-                )
-                subtitles.append(sub)
+                
+                # We need duration. MoviePy clip provided it.
+                # Re-open or use ffmpeg probe (skipping probe for complexity, re-open minimal)
+                try:
+                     vc = VideoFileClip(video_path)
+                     duration = vc.duration
+                     vc.close()
+                except:
+                     duration = 10 # Fallback
+                
+                final_segments_for_render = [{
+                    "start": 0,
+                    "end": duration,
+                    "translated": display_text,
+                    "speaker": "A"
+                }]
 
-            final_clip = CompositeVideoClip([clip] + subtitles)
-            final_clip.duration = clip.duration
+            # GENERATE SUBTITLES (ASS)
+            ass_path = os.path.join(self.task_dir, "captions.ass")
+            self._generate_ass(final_segments_for_render, ass_path)
+            
+            # GENERATE SRT (for optional use)
+            srt_path = os.path.join(self.task_dir, "captions.srt")
+            self._generate_srt(final_segments_for_render, srt_path)
+
+            # RENDER VIDEO (FFMPEG)
             output_path = os.path.join(self.task_dir, f"processed_{final_video_name}")
-
-            # Check if audio exists
-            fps = getattr(clip, "fps", 24)
-            if clip.audio:
-                final_clip.write_videofile(
-                    output_path, codec="libx264", audio_codec="aac", fps=fps
-                )
-            else:
-                final_clip.write_videofile(
-                    output_path, codec="libx264", audio=False, fps=fps
-                )
-
-            # Generate SRT
-            srt_output_path = None
-            if final_segments_for_srt:
-                srt_path = os.path.join(self.task_dir, "captions.srt")
-                srt_output_path = self._generate_srt(final_segments_for_srt, srt_path)
-
+            
+            success = self._burn_subtitles_ffmpeg(video_path, ass_path, output_path)
+            if not success:
+                print("[-] FFMPEG rendering failed. Attempting legacy MoviePy method not supported anymore.")
+            
             # Cleanup Raw: Attempt to move
-            # Only move if we didn't start with a 'raw_' file already in the destination
-            # And if the input is not already the destination raw file
             input_abs = os.path.abspath(video_path)
             raw_dest_abs = os.path.abspath(
                 os.path.join(self.task_dir, f"raw_{final_video_name}")
@@ -690,12 +733,15 @@ class XPostSkill:
                 except Exception as e:
                     print(f"[-] Warning: Failed to move raw file: {e}")
 
-            return output_path, srt_output_path
+            return output_path, srt_path
 
         except Exception as e:
             print(f"[-] Video processing error: {e}")
+            import traceback
+            traceback.print_exc()
             target_path = os.path.join(self.task_dir, final_video_name) if self.task_dir else None
             return target_path, None
+
 
     def _create_markdown(self, data, translated_text, media_files):
         print("[*] Creating Markdown...")
