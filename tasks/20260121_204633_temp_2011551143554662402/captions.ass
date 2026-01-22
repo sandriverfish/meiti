@@ -1,0 +1,45 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 1
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Microsoft YaHei,60,&H0000FFFF,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:04.00,Default,,0,0,0,,你好，我叫Gavin，我和我们的机器狗Bits在一起。
+Dialogue: 0,0:00:04.00,0:00:08.16,Default,,0,0,0,,今天我们在OpenMind总部，我将带您体验我们的全自动
+Dialogue: 0,0:00:08.16,0:00:13.51,Default,,0,0,0,,功能，由OpenMind的BrainPak和NVIDIA Jetson Thor提供支持。我们将在OpenMind总部体验
+Dialogue: 0,0:00:13.51,0:00:19.28,Default,,0,0,0,,地图绘制、寻找遗失物品和自动充电功能。我们位于
+Dialogue: 0,0:00:19.28,0:00:23.83,Default,,0,0,0,,旧金山的OpenMind总部。那么，让我们从入门和地图绘制开始。当Bits醒来时，
+Dialogue: 0,0:00:23.83,0:00:27.28,Default,,0,0,0,,他会问我一系列问题来开始入门流程。
+Dialogue: 0,0:00:27.28,0:00:33.12,Default,,0,0,0,,你好，我是Bits，你叫什么名字？嗨，Bits，我叫Gavin。
+Dialogue: 0,0:00:34.96,0:00:40.48,Default,,0,0,0,,Gavin，谢谢。你已经注册成功。就这样，我的身份已经注册成功，
+Dialogue: 0,0:00:40.48,0:00:44.15,Default,,0,0,0,,现在Bits将开始绘制地图。我准备好走动并绘制地图。
+Dialogue: 0,0:00:49.28,0:00:53.92,Default,,0,0,0,,这是OpenMind办公室，现在Bits已经开始漫游，
+Dialogue: 0,0:00:53.92,0:00:59.52,Default,,0,0,0,,标记不同的位置，如主楼层、办公室和客厅。现在Bits已经
+Dialogue: 0,0:00:59.52,0:01:04.56,Default,,0,0,0,,完成了整个办公室楼层的绘制，我们可以命令他去办公室的任何地方。
+Dialogue: 0,0:01:04.56,0:01:09.92,Default,,0,0,0,,例如，嗨Bits，去客厅吧。我正在带你去客厅。
+Dialogue: 0,0:01:12.15,0:01:14.64,Default,,0,0,0,,现在Bits将带我去客厅。
+Dialogue: 0,0:01:14.64,0:01:20.64,Default,,0,0,0,,所以，Bits不仅会带我去它绘制的地图上的不同位置，而且在绘制地图时，
+Dialogue: 0,0:01:20.64,0:01:25.20,Default,,0,0,0,,它还会跟踪不同的物体。例如，我把钱包忘在沙发上了，
+Dialogue: 0,0:01:25.20,0:01:29.68,Default,,0,0,0,,所以现在我可以问Bits，嗨Bits，我把钱包忘在哪里了。你能帮我找到吗？
+Dialogue: 0,0:01:29.68,0:01:32.48,Default,,0,0,0,,钱包在主楼层的沙发上找到。
+Dialogue: 0,0:01:32.48,0:01:36.48,Default,,0,0,0,,正如我们在这里看到的，Bits找到了我的钱包，并记住了它的位置。
+Dialogue: 0,0:01:36.48,0:01:38.24,Default,,0,0,0,,现在它正在带我去沙发。
+Dialogue: 0,0:01:38.23,0:01:42.56,Default,,0,0,0,,就这样，比茨在沙发上找到了我的钱包。所以这是这一天的结尾，
+Dialogue: 0,0:01:42.56,0:01:46.56,Default,,0,0,0,,然后我们可以命令比茨去自动充电。比茨，你可以去充电吗？
+Dialogue: 0,0:01:47.59,0:01:49.03,Default,,0,0,0,,我要去充电了。
+Dialogue: 0,0:01:51.51,0:01:56.71,Default,,0,0,0,,现在比茨要去他的自动充电站，他正在使用二维码来对齐
+Dialogue: 0,0:01:56.71,0:02:02.15,Default,,0,0,0,,充电器。所以我要去充电了。现在比茨要去他的自动充电站，他
+Dialogue: 0,0:02:02.95,0:02:07.75,Default,,0,0,0,,现在比茨要去他的自动充电站，他正在使用二维码来对齐
+Dialogue: 0,0:02:07.75,0:02:12.47,Default,,0,0,0,,充电垫并休息。你不需要担心手动为机器人充电。它们会为你处理一切。
+Dialogue: 0,0:02:12.47,0:02:16.96,Default,,0,0,0,,这是我们在OpenMind开发的一些完全自主的功能。使用OpenMind Brain Pack，
+Dialogue: 0,0:02:16.96,0:02:21.43,Default,,0,0,0,,以及NVIDIA Jetson Thor，我们能够在内部开发这些功能。但是
+Dialogue: 0,0:02:21.43,0:02:26.00,Default,,0,0,0,,因为我们是一个开源平台，其他开发者可以构建自己的应用程序和功能，并在OM1上部署它们。
+Dialogue: 0,0:02:26.00,0:02:30.71,Default,,0,0,0,,这对于机器人用例来说只是一个开始，我们很高兴为你带来更多。所以请关注我们，期待未来。
+Dialogue: 0,0:02:30.71,0:02:36.31,Default,,0,0,0,,并部署特性和功能到OM1上。这仅仅是机器人用例的开始，
+Dialogue: 0,0:02:36.31,0:02:40.00,Default,,0,0,0,,我们很高兴为您带来更多。因此，请关注我们并期待未来。

@@ -50,7 +50,9 @@ class XPostSkill:
         self.whisper_model = whisper_model
         self.task_dir = None
         self.client = OpenAI(
-            base_url="https://integrate.api.nvidia.com/v1", api_key=self.nvidia_key
+            base_url="https://integrate.api.nvidia.com/v1", 
+            api_key=self.nvidia_key,
+            timeout=30.0
         )
         # Font setup
         self.font_path = "arial.ttf"
