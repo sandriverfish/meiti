@@ -1,0 +1,149 @@
+[
+  {
+    "start": 0.0,
+    "end": 1.28,
+    "original": "You want to hear a funny joke?",
+    "translated": "你想听一个有趣的笑话吗？",
+    "speaker": "A"
+  },
+  {
+    "start": 1.8,
+    "end": 2.2,
+    "original": "Yes.",
+    "translated": "是的。",
+    "speaker": "B"
+  },
+  {
+    "start": 4.04,
+    "end": 5.76,
+    "original": "I haven't even said it yet, but",
+    "translated": "我还没说出来呢，但是",
+    "speaker": "A"
+  },
+  {
+    "start": 5.8,
+    "end": 6.48,
+    "original": "Yeah, go ahead.",
+    "translated": "好吧，继续说。",
+    "speaker": "B"
+  },
+  {
+    "start": 6.5200000000000005,
+    "end": 8.96,
+    "original": "Yeah, it's gonna be really funny when I actually say the joke.",
+    "translated": "是的，当我真正说出笑话时，它会很搞笑。",
+    "speaker": "A"
+  },
+  {
+    "start": 9.32,
+    "end": 9.72,
+    "original": "Okay.",
+    "translated": "好的。",
+    "speaker": "B"
+  },
+  {
+    "start": 9.76,
+    "end": 12.48,
+    "original": "So why did the picture go to prison?",
+    "translated": "那么为什么这幅画进了监狱？",
+    "speaker": "A"
+  },
+  {
+    "start": 13.32,
+    "end": 14.56,
+    "original": "To get away from the mirror?",
+    "translated": "是为了躲开镜子吗？",
+    "speaker": "B"
+  },
+  {
+    "start": 14.72,
+    "end": 16.32,
+    "original": "No, because it was framed.",
+    "translated": "不，是因为它被框起来了。",
+    "speaker": "A"
+  },
+  {
+    "start": 16.84,
+    "end": 17.400000000000002,
+    "original": "Oh,",
+    "translated": "哦，",
+    "speaker": "B"
+  },
+  {
+    "start": 20.52,
+    "end": 23.6,
+    "original": "that's a good one. That's a good one. Yeah. Yeah. Yeah.",
+    "translated": "这个笑话不错。这是一个好笑话。是的，是的，是的。",
+    "speaker": "B"
+  },
+  {
+    "start": 25.080000000000002,
+    "end": 26.88,
+    "original": "Do you have any more? I've got one more for you.",
+    "translated": "你还有其他笑话吗？我还有一个笑话要告诉你。",
+    "speaker": "A"
+  },
+  {
+    "start": 27.0,
+    "end": 28.16,
+    "original": "Okay, go ahead.",
+    "translated": "好的，继续说。",
+    "speaker": "B"
+  },
+  {
+    "start": 28.48,
+    "end": 29.0,
+    "original": "Okay.",
+    "translated": "好的。",
+    "speaker": "A"
+  },
+  {
+    "start": 29.32,
+    "end": 30.8,
+    "original": "What do you call a fake noodle?",
+    "translated": "你怎么称呼一根假面条？",
+    "speaker": "A"
+  },
+  {
+    "start": 31.28,
+    "end": 32.92,
+    "original": "A fake noodle? I don't know.",
+    "translated": "假面条？我不知道。",
+    "speaker": "B"
+  },
+  {
+    "start": 32.92,
+    "end": 33.72,
+    "original": "I didn't ask that.",
+    "translated": "我没问你这个。",
+    "speaker": "A"
+  },
+  {
+    "start": 37.72,
+    "end": 38.6,
+    "original": "Nice. Nice.",
+    "translated": "很好。很好。",
+    "speaker": "B"
+  },
+  {
+    "start": 38.72,
+    "end": 40.04,
+    "original": "I like that one. Yeah.",
+    "translated": "我喜欢这个笑话。是的。",
+    "speaker": "B"
+  },
+  {
+    "start": 40.08,
+    "end": 41.16,
+    "original": "Yeah, that's a good one.",
+    "translated": "是的，这是一个好笑话。",
+    "speaker": "B"
+  },
+  {
+    "start": 41.28,
+    "end": 41.84,
+    "original": "Yeah.",
+    "translated": "是的。",
+    "speaker": "B"
+  }
+]

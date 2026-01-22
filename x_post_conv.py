@@ -26,6 +26,7 @@ import re
 import emoji
 import textwrap
 import shutil
+from deep_translator import GoogleTranslator
 
 
 class XPostSkill:
@@ -34,7 +35,7 @@ class XPostSkill:
         url,
         nvidia_key,
         target_lang="zh",
-        model_name="minimaxai/minimax-m2",
+        model_name="meta/llama-3.1-405b-instruct",
         cookies_browser=None,
         cookies_file=None,
         local_file=None,
@@ -320,24 +321,15 @@ class XPostSkill:
             return None
 
     def _translate(self, text):
-        print("[*] Translating text...")
+        # Using Deep Translator (Google) instead of NVIDIA/OpenAI
+        print("[*] Translating text (Google)...")
         if not text:
             return ""
         try:
-            prompt = (
-                f"Translate to natural, professional Simplified Chinese for social media. "
-                f"Return only the translation.\n\nText: {text}"
-            )
-            completion = self.client.chat.completions.create(
-                model=self.model_name,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.3,
-            )
-            content = completion.choices[0].message.content.strip()
-            # Clean think tags just in case
-            if "</think>" in content:
-                content = content.split("</think>")[-1].strip()
-            return content
+            # target_lang is 'zh', but GoogleTranslator uses 'zh-CN' usually or 'zh-TW'.
+            # 'zh' maps to Simplified Chinese in Google Translate usually.
+            translator = GoogleTranslator(source='auto', target='zh-CN')
+            return translator.translate(text)
         except Exception as e:
             print(f"[-] Translation error: {e}")
             return text
@@ -381,32 +373,21 @@ class XPostSkill:
                     max_tokens=4000,
                 )
                 
-                content = response.choices[0].message.content.strip()
+                # ... (Existing batch logic using LLM is removed/replaced)
+                # Google Translate doesn't support complex JSON batching in the same way 
+                # effectively without risking blocks or needing iterators.
+                # We will fall back to individual translation for quality/safety with deep-translator
+                # or simple list iteration.
                 
-                # Robust extraction: Find the first '[' and last ']'
-                start_idx = content.find('[')
-                end_idx = content.rfind(']')
-                
-                if start_idx != -1 and end_idx != -1:
-                    json_str = content[start_idx : end_idx + 1]
-                    try:
-                        parsed = json.loads(json_str)
-                        if isinstance(parsed, list):
-                            all_results.extend(parsed)
-                        else:
-                            print("[-] Batch translation returned non-list JSON.")
-                            all_results.extend([{"translated": t, "speaker": "A"} for t in chunk])
-                    except json.JSONDecodeError:
-                         print("[-] JSON decode error despite cleanup.")
-                         all_results.extend([{"translated": t, "speaker": "A"} for t in chunk])
-                else:
-                    print("[-] Error: No JSON list brackets found in response.")
-                    all_results.extend([{"translated": t, "speaker": "A"} for t in chunk])
-
-            except Exception as e:
-                print(f"[-] Translation API error: {e}")
-                all_results.extend([{"translated": t, "speaker": "A"} for t in chunk])
+                # Legacy cleanup
+                pass
+            except Exception:
+                pass
         
+        # Override to just use loop since we dropped LLM
+        return self._translate_individual(texts)
+
+
         # Ensure alignment
         if len(all_results) != len(texts):
             print(f"[-] Warning: Translation count mismatch ({len(all_results)} vs {len(texts)}). adjusting...")
@@ -480,8 +461,8 @@ class XPostSkill:
         centis = int((secs - int(secs)) * 100)
         return f"{hours}:{minutes:02}:{int(secs):02}.{centis:02}"
 
-    def _generate_ass(self, segments, output_path):
-        print(f"[*] Generating ASS: {output_path}")
+    def _generate_ass(self, segments, output_path, margin_v=50):
+        print(f"[*] Generating ASS: {output_path} (MarginV={margin_v})")
         
         header = """[Script Info]
 ScriptType: v4.00+
@@ -491,10 +472,10 @@ WrapStyle: 1
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,Microsoft YaHei,60,&H00FFFFFF,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
-Style: SpeakerA,Microsoft YaHei,60,&H0000FFFF,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
-Style: SpeakerB,Microsoft YaHei,60,&H00FFFF00,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
-Style: SpeakerC,Microsoft YaHei,60,&H0000FF00,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
+Style: Default,Microsoft YaHei,60,&H0000FFFF,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,{margin_v},1
+Style: SpeakerA,Microsoft YaHei,60,&H0000FFFF,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,{margin_v},1
+Style: SpeakerB,Microsoft YaHei,60,&H00FFFF00,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,{margin_v},1
+Style: SpeakerC,Microsoft YaHei,60,&H0000FF00,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,{margin_v},1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -540,23 +521,29 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         # So we'll try to rely on them being in the same task_dir usually.
         
         try:
-             rel_input = os.path.basename(video_path)
-             rel_sub = os.path.basename(sub_path)
+             # Ensure absolute paths for FFMPEG to avoid ambiguity
+             abs_input = os.path.abspath(video_path)
+             abs_sub = os.path.abspath(sub_path)
+             # Windows FFMPEG filter path escaping:
+             # 1. Drive letter colon (C:) -> C\:
+             # 2. Backslashes (\) -> /
+             abs_sub_escaped = abs_sub.replace("\\", "/").replace(":", "\\:")
+             
              rel_output = os.path.basename(output_path)
              
              # Verify files exist
-             if not os.path.exists(video_path):
-                 print(f"[-] Input video missing: {video_path}")
+             if not os.path.exists(abs_input):
+                 print(f"[-] Input video missing: {abs_input}")
                  return False
-             if not os.path.exists(sub_path):
-                 print(f"[-] Subtitle file missing: {sub_path}")
+             if not os.path.exists(abs_sub):
+                 print(f"[-] Subtitle file missing: {abs_sub}")
                  return False
 
              cmd = [
                 "ffmpeg",
                 "-y",
-                "-i", rel_input,
-                "-vf", f"subtitles='{rel_sub}'",
+                "-i", abs_input,
+                "-vf", f"subtitles='{abs_sub_escaped}'",
                 "-c:v", "libx264",
                 "-preset", "medium",
                 "-crf", "23",
@@ -595,14 +582,29 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         
         # Audio Extraction Path
         audio_path = os.path.join(self.task_dir, "audio.mp3")
+        
+        # Detect Aspect Ratio
+        margin_v = 50 # Default Landscape
         try:
-            print("[*] Extracting audio...")
-            video_clip = VideoFileClip(video_path)
-            if video_clip.audio:
-                video_clip.audio.write_audiofile(audio_path, verbose=False, logger=None)
-            video_clip.close()
+             import imageio_ffmpeg
+             # Simple probe using ffmpeg to get width/height
+             # We rely on previous ffmpeg knowledge or we can use moviepy
+             # Since we use VideoFileClip below, let's use that.
+             # Postpone open to here
+             print("[*] Extracting audio and checking AR...")
+             video_clip = VideoFileClip(video_path)
+             w, h = video_clip.size
+             if h > w:
+                 print(f"[*] Portrait Video Detected ({w}x{h}). Adjusting subtitles.")
+                 margin_v = 350 # Higher margin for portrait
+             else:
+                 print(f"[*] Landscape/Square Video Detected ({w}x{h}).")
+             
+             if video_clip.audio:
+                 video_clip.audio.write_audiofile(audio_path, verbose=False, logger=None)
+             video_clip.close()
         except Exception as e:
-            print(f"[-] Audio extraction failed: {e}")
+            print(f"[-] Audio/AR check failed: {e}")
             return None, None
 
         # Check for Manual Translation Override
@@ -633,6 +635,38 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                 translated_results = []
                 if original_texts:
                     translated_results = self._translate_batch(original_texts)
+
+                # Validation & Retry Logic for Empty Translations
+                print("[*] Validating translations...")
+                for i, item in enumerate(translated_results):
+                    needs_retry = False
+                    if isinstance(item, dict):
+                        if not item.get("translated"):
+                             needs_retry = True
+                             print(f"[-] Empty translation at index {i}. Retrying...")
+                    else:
+                         # Likely string fallback or weird format
+                         if not item:
+                             needs_retry = True
+                    
+                    if needs_retry:
+                        # Retry individual
+                        retry_text = original_texts[i]
+                        try:
+                           retry_res = self._translate(retry_text)
+                           if isinstance(item, dict):
+                               item["translated"] = retry_res
+                           else:
+                               # If it was a string or something else, update the list 
+                               # Note: logic below expects dict or string, 
+                               # but _translate_batch is supposed to return dicts.
+                               # If we are here, we modify the item in place if dict.
+                               pass 
+                           # Force update in list if it was strictly empty string
+                           if not isinstance(item, dict):
+                               translated_results[i] = {"translated": retry_res, "speaker": "A"}
+                        except Exception as e:
+                           print(f"[-] Retry failed for index {i}: {e}")
 
                 # Use results
                 text_idx = 0
@@ -707,7 +741,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 
             # GENERATE SUBTITLES (ASS)
             ass_path = os.path.join(self.task_dir, "captions.ass")
-            self._generate_ass(final_segments_for_render, ass_path)
+            self._generate_ass(final_segments_for_render, ass_path, margin_v=margin_v)
             
             # GENERATE SRT (for optional use)
             srt_path = os.path.join(self.task_dir, "captions.srt")

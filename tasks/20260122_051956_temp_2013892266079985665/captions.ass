@@ -1,0 +1,33 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 1
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Microsoft YaHei,60,&H0000FFFF,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,50,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:01.28,Default,,0,0,0,,你想听一个有趣的笑话吗？
+Dialogue: 0,0:00:01.80,0:00:02.20,Default,,0,0,0,,是的。
+Dialogue: 0,0:00:04.04,0:00:05.75,Default,,0,0,0,,我还没说出来呢，但是
+Dialogue: 0,0:00:05.79,0:00:06.48,Default,,0,0,0,,好吧，继续说。
+Dialogue: 0,0:00:06.52,0:00:08.96,Default,,0,0,0,,是的，当我真正说出笑话时，它会很搞笑。
+Dialogue: 0,0:00:09.32,0:00:09.72,Default,,0,0,0,,好的。
+Dialogue: 0,0:00:09.75,0:00:12.48,Default,,0,0,0,,那么为什么这幅画进了监狱？
+Dialogue: 0,0:00:13.32,0:00:14.56,Default,,0,0,0,,是为了躲开镜子吗？
+Dialogue: 0,0:00:14.72,0:00:16.32,Default,,0,0,0,,不，是因为它被框起来了。
+Dialogue: 0,0:00:16.83,0:00:17.40,Default,,0,0,0,,哦，
+Dialogue: 0,0:00:20.51,0:00:23.60,Default,,0,0,0,,这个笑话不错。这是一个好笑话。是的，是的，是的。
+Dialogue: 0,0:00:25.08,0:00:26.87,Default,,0,0,0,,你还有其他笑话吗？我还有一个笑话要告诉你。
+Dialogue: 0,0:00:27.00,0:00:28.16,Default,,0,0,0,,好的，继续说。
+Dialogue: 0,0:00:28.48,0:00:29.00,Default,,0,0,0,,好的。
+Dialogue: 0,0:00:29.32,0:00:30.80,Default,,0,0,0,,你怎么称呼一根假面条？
+Dialogue: 0,0:00:31.28,0:00:32.92,Default,,0,0,0,,假面条？我不知道。
+Dialogue: 0,0:00:32.92,0:00:33.71,Default,,0,0,0,,我没问你这个。
+Dialogue: 0,0:00:37.71,0:00:38.60,Default,,0,0,0,,很好。很好。
+Dialogue: 0,0:00:38.71,0:00:40.03,Default,,0,0,0,,我喜欢这个笑话。是的。
+Dialogue: 0,0:00:40.07,0:00:41.15,Default,,0,0,0,,是的，这是一个好笑话。
+Dialogue: 0,0:00:41.28,0:00:41.84,Default,,0,0,0,,是的。

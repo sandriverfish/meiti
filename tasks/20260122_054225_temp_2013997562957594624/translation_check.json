@@ -1,0 +1,156 @@
+[
+  {
+    "start": 0.0,
+    "end": 4.64,
+    "original": "Well, let's get into it and talk about some software. So, Adrenaline has some new features for",
+    "translated": "好吧，让我们开始讨论一些软件。Adrenaline最近推出了几个新功能，",
+    "speaker": "A"
+  },
+  {
+    "start": 4.64,
+    "end": 6.96,
+    "original": "developers who are going to use AI.",
+    "translated": "AI",
+    "speaker": "A"
+  },
+  {
+    "start": 6.96,
+    "end": 10.08,
+    "original": "What they're going to see when they install the new version of Adrenaline,",
+    "translated": "Adrenaline",
+    "speaker": "A"
+  },
+  {
+    "start": 10.08,
+    "end": 14.32,
+    "original": "they're going to see an optional click, which is going to say AI bundle.",
+    "translated": "AI",
+    "speaker": "A"
+  },
+  {
+    "start": 14.32,
+    "end": 19.36,
+    "original": "And what's going to happen there, it's almost like magic. What you get is a complete privacy.",
+    "translated": "在那里发生的一切，就像魔术一样。你将获得完全的隐私。",
+    "speaker": "A"
+  },
+  {
+    "start": 19.36,
+    "end": 24.0,
+    "original": "You can disconnect from Internet, and from that point on, you can actually work with that system.",
+    "translated": "您可以断开互联网连接，此后便可正常使用该系统。",
+    "speaker": "A"
+  },
+  {
+    "start": 24.0,
+    "end": 24.96,
+    "original": "What's the beauty of that?",
+    "translated": "有什么美妙之处呢？",
+    "speaker": "A"
+  },
+  {
+    "start": 25.6,
+    "end": 27.84,
+    "original": "But first of all, there is no additional cost.",
+    "translated": "首先，这项服务不需要额外的费用。",
+    "speaker": "A"
+  },
+  {
+    "start": 27.84,
+    "end": 32.08,
+    "original": "You have Power of the Rockum and our graphic chip in front of you.",
+    "translated": "Rockum",
+    "speaker": "A"
+  },
+  {
+    "start": 32.08,
+    "end": 36.96,
+    "original": "On top of Rockum, you have a PyTorch. On the top of PyTorch, we put Comfii UI.",
+    "translated": "RockumPyTorchComfii UI",
+    "speaker": "A"
+  },
+  {
+    "start": 36.96,
+    "end": 39.92,
+    "original": "So I saw Comfii UI's announcement today on social media.",
+    "translated": "Comfii UI",
+    "speaker": "B"
+  },
+  {
+    "start": 39.92,
+    "end": 42.4,
+    "original": "Tell us more about what that means for users of Rockum.",
+    "translated": "Rockum",
+    "speaker": "B"
+  },
+  {
+    "start": 43.120000000000005,
+    "end": 49.28,
+    "original": "What it means, you and your system right now can create AI videos or modify the videos.",
+    "translated": "AI",
+    "speaker": "A"
+  },
+  {
+    "start": 49.28,
+    "end": 51.36,
+    "original": "But you do that in a privacy or your computer.",
+    "translated": "但您可以在私人空间或自己的电脑上进行。",
+    "speaker": "A"
+  },
+  {
+    "start": 51.36,
+    "end": 54.8,
+    "original": "You're not sending the pictures of your kids somewhere out there.",
+    "translated": "您并不是把孩子的照片发到某个不安全的地方。",
+    "speaker": "A"
+  },
+  {
+    "start": 54.8,
+    "end": 56.64,
+    "original": "You are doing that on your system.",
+    "translated": "您是在自己的系统上进行的。",
+    "speaker": "A"
+  },
+  {
+    "start": 56.64,
+    "end": 62.08,
+    "original": "So let's talk about a different type of magic, the magic of open source and our ecosystem",
+    "translated": "让我们谈谈另一种魔法 —— 开源的魔力和我们的生态系统。",
+    "speaker": "A"
+  },
+  {
+    "start": 62.08,
+    "end": 65.12,
+    "original": "in this Rockum software stack. What does that mean for developers?",
+    "translated": "Rockum",
+    "speaker": "A"
+  },
+  {
+    "start": 65.12,
+    "end": 70.64,
+    "original": "The idea is that a developer understands all the pieces of the puzzle.",
+    "translated": "开发人员需要对所有拼图碎片有全面的理解。",
+    "speaker": "A"
+  },
+  {
+    "start": 70.64,
+    "end": 75.2,
+    "original": "They can modify the pieces of the puzzle, improve it for them, and also give it back to us.",
+    "translated": "他们可以修改拼图的各个部分，对其进行改进，并将改进后的成果反馈给我们。",
+    "speaker": "A"
+  },
+  {
+    "start": 75.2,
+    "end": 81.12,
+    "original": "So all the developers working on that system can contribute, do more with that system.",
+    "translated": "这样，所有在该系统上工作的开发人员都可以贡献，进一步发挥该系统的潜能。",
+    "speaker": "A"
+  },
+  {
+    "start": 81.12,
+    "end": 84.16,
+    "original": "The openness actually moves the technology forward.",
+    "translated": "开放性实际上推动了技术的进步。",
+    "speaker": "A"
+  }
+]

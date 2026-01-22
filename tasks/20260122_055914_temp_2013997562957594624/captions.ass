@@ -1,0 +1,37 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 1
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Microsoft YaHei,60,&H0000FFFF,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,{margin_v},1
+Style: SpeakerA,Microsoft YaHei,60,&H0000FFFF,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,{margin_v},1
+Style: SpeakerB,Microsoft YaHei,60,&H00FFFF00,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,{margin_v},1
+Style: SpeakerC,Microsoft YaHei,60,&H0000FF00,&H000000FF,&H00000000,&H60000000,0,0,0,0,100,100,0,0,1,2,0,2,10,10,{margin_v},1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:04.63,SpeakerA,,0,0,0,,好吧，让我们开始讨论一些软件。所以，Adrenaline 有一些新功能
+Dialogue: 0,0:00:04.63,0:00:06.96,SpeakerA,,0,0,0,,即将使用人工智能的开发人员。
+Dialogue: 0,0:00:06.96,0:00:10.08,SpeakerA,,0,0,0,,当他们安装新版本的 Adrenaline 时他们会看到什么，
+Dialogue: 0,0:00:10.08,0:00:14.32,SpeakerA,,0,0,0,,他们将看到一个可选的点击，即“AI 捆绑包”。
+Dialogue: 0,0:00:14.32,0:00:19.35,SpeakerA,,0,0,0,,那里将会发生什么，这几乎就像魔术一样。您得到的是完全的隐私。
+Dialogue: 0,0:00:19.35,0:00:24.00,SpeakerA,,0,0,0,,您可以断开与互联网的连接，从那时起，您就可以实际使用该系统了。
+Dialogue: 0,0:00:24.00,0:00:24.96,SpeakerA,,0,0,0,,那有什么好处呢？
+Dialogue: 0,0:00:25.60,0:00:27.83,SpeakerA,,0,0,0,,但首先，没有额外的费用。
+Dialogue: 0,0:00:27.83,0:00:32.07,SpeakerA,,0,0,0,,Rockum 的力量和我们的图形芯片就在您面前。
+Dialogue: 0,0:00:32.07,0:00:36.96,SpeakerA,,0,0,0,,在 Rockum 之上，你有一个 PyTorch。在PyTorch之上，我们放置了Comfii UI。
+Dialogue: 0,0:00:36.96,0:00:39.92,SpeakerA,,0,0,0,,所以我今天在社交媒体上看到了 Comfii UI 的公告。
+Dialogue: 0,0:00:39.92,0:00:42.39,SpeakerA,,0,0,0,,请告诉我们更多关于这对 Rockum 用户意味着什么的信息。
+Dialogue: 0,0:00:43.12,0:00:49.28,SpeakerA,,0,0,0,,这意味着，您和您的系统现在可以创建 AI 视频或修改视频。
+Dialogue: 0,0:00:49.28,0:00:51.35,SpeakerA,,0,0,0,,但您是在隐私或计算机中执行此操作。
+Dialogue: 0,0:00:51.35,0:00:54.79,SpeakerA,,0,0,0,,您不会将孩子的照片发送到那里。
+Dialogue: 0,0:00:54.79,0:00:56.64,SpeakerA,,0,0,0,,您正在您的系统上执行此操作。
+Dialogue: 0,0:00:56.64,0:01:02.07,SpeakerA,,0,0,0,,那么让我们来谈谈不同类型的魔力，开源的魔力和我们的生态系统
+Dialogue: 0,0:01:02.07,0:01:05.12,SpeakerA,,0,0,0,,在这个 Rockum 软件堆栈中。这对开发商意味着什么？
+Dialogue: 0,0:01:05.12,0:01:10.64,SpeakerA,,0,0,0,,这个想法是开发人员了解难题的所有部分。
+Dialogue: 0,0:01:10.64,0:01:15.20,SpeakerA,,0,0,0,,他们可以修改拼图的各个部分，为他们改进它，也可以将其返还给我们。
+Dialogue: 0,0:01:15.20,0:01:21.12,SpeakerA,,0,0,0,,因此，所有致力于该系统的开发人员都可以做出贡献，利用该系统做更多的事情。
+Dialogue: 0,0:01:21.12,0:01:24.15,SpeakerA,,0,0,0,,开放性实际上推动了技术的进步。

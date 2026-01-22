@@ -4,11 +4,11 @@ import subprocess
 from openai import OpenAI
 
 # Configuration
-TASK_DIR = r"d:\MyCode\meiti\tasks\20260121_204633_temp_2011551143554662402"
+TASK_DIR = r"d:\MyCode\meiti\tasks\20260122_051956_temp_2013892266079985665"
 JSON_PATH = os.path.join(TASK_DIR, "translation_check.json")
 ASS_PATH = os.path.join(TASK_DIR, "captions.ass")
-RAW_VIDEO = os.path.join(TASK_DIR, "raw_temp_2011551143554662402.mp4")
-OUTPUT_VIDEO = os.path.join(TASK_DIR, "processed_final_translated_yellow.mp4")
+RAW_VIDEO = os.path.join(TASK_DIR, "raw_temp_2013892266079985665.mp4")
+OUTPUT_VIDEO = os.path.join(TASK_DIR, "processed_temp_2013892266079985665.mp4")
 NVIDIA_KEY = "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"
 MODEL = "meta/llama-3.1-405b-instruct"
 
@@ -62,8 +62,8 @@ def translate_segments(segments):
     indices = []
     
     for i, seg in enumerate(segments):
-        # Heuristic: if translated == original, it needs translation
-        if seg["translated"] == seg["original"]:
+        # Heuristic: if translated == original OR translated is empty, it needs translation
+        if seg["translated"] == seg["original"] or not seg["translated"]:
             to_translate.append(seg["original"])
             indices.append(i)
             
